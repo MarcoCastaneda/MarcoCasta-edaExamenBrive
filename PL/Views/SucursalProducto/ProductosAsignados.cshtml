@@ -1,0 +1,79 @@
+﻿@model ML.SucursalProducto
+@{
+    ViewBag.Title = "ProductosAsignadas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Productos</h2>
+
+<div class="container">
+    <div class="row">
+        
+
+            <div class="form-group hidden">
+
+
+                @Html.LabelFor(model => model.Sucursal.IdSucursal, new { @class = "control-label col-md-2 hidden" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Sucursal.IdSucursal, new { @class = "form-control hidden", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.Sucursal.IdSucursal)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Sucursal.NombreSucursal, new { @class = "control-label", @readonly = true })
+                    @Html.TextBoxFor(model => model.Sucursal.NombreSucursal, new { @class = "form-control", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.Sucursal.NombreSucursal)
+                </div>
+            </div>
+
+           
+ </div>      
+       
+    </div>
+
+    <br />
+
+
+<br />
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-success glyphicon glyphicon-plus " href="@Url.Action("ProductoNoAsignados", "SucursalProducto", Model.Sucursal)"><i class="bi bi-plus-square"></i></a>
+        </div>
+    </div>
+</div>
+<div class="row" style="padding-top:30px">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <th class="text-center" scope="col">
+                    Eliminar
+                </th>
+                <th class="text-center hidden" scope="col">
+                    IdSucursalProducto
+                </th>
+              
+               
+                <th class="text-center hidden" scope="col">
+                    Nombre de producto
+                </th>
+               
+            </tr>
+            @foreach (ML.SucursalProducto sucursalProducto in Model.SucursalProductos)
+            {
+                <tr>
+
+                    <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash " href="@Url.Action("Delete", "SucursalProducto", new { IdSucursalProducto = sucursalProducto.IdSucursalProducto})" onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3"></i></a></td>
+
+                    <td class="text-center hidden">
+                        @sucursalProducto.IdSucursalProducto
+                    </td>
+                    <td class="text-left hidden">
+                        @sucursalProducto.Producto.Nombre
+                    </td>
+                  
+                </tr>
+            }
+        </table>
+    </div>
+</div>

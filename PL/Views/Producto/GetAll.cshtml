@@ -1,0 +1,80 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Producto</h2>
+    </div>
+</div>
+
+
+
+
+
+@using (Html.BeginForm("GetAll", "Producto", FormMethod.Post, new { enctype = "multipart/form_data" }))
+{
+
+
+
+
+        
+}
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un Usuario para editarlo o + para agregar...</h5>
+        <hr />
+    </div>
+
+
+    
+
+    <div style="float:right;">
+        @Html.ActionLink("+","Form","Producto", htmlAttributes: new { @class = "btn btn-success" })
+
+    </div>
+    </div>
+
+
+        </tr>
+    
+        <div class="row">
+        @foreach (ML.Producto producto in Model.Productos)
+        {
+            <div class="col mt-3 pt-3">
+            <div class="card text-white bg-dark border-success mb-3 border-4" style="width: 18rem;">
+                <img src="data:image/*;base64,@producto.Imagen"  class="card-img-top">
+              
+                <div class="card-body">
+                     <p class="card-text" >@producto.IdProducto</p>
+                    <h5 class="card-title text-center bg-secondary" >@producto.Nombre</h5>
+                    
+                    <p class="card-text">Precio: @producto.PrecioUnitario</p>
+                    <p class="card-text">Codigo Barras: @producto.Codigo</p>
+                   
+                    <p class="card-text">Stock: @producto.Stock</p>
+                    
+                    
+                    <a href= new { IdProducto = @producto.IdProducto } ,class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            </div>
+
+
+        }
+
+
+
+
+
+</div>
+
+
+

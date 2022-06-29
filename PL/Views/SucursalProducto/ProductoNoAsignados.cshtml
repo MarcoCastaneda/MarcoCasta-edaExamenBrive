@@ -1,0 +1,80 @@
+﻿@model ML.SucursalProducto
+@{
+    ViewBag.Title = "ProductoSinAsignar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Productos</h2>
+
+<div class="container">
+
+    <div class="row">
+
+        @using (Html.BeginForm("AgregarProductos", "SucursalProducto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="col">
+
+                @Html.LabelFor(model => model.Sucursal.IdSucursal, new { @class = "control-label col-md-2 hidden" })
+                
+
+                    @Html.TextBoxFor(model => model.Sucursal.IdSucursal, new { @class = "form-control hidden", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.Sucursal.IdSucursal)
+                </div>
+           
+            <div class="col">
+
+                
+
+                    @Html.LabelFor(model => model.Sucursal.NombreSucursal, new { @class = "control-label", @readonly = true })
+                    @Html.TextBoxFor(model => model.Sucursal.NombreSucursal, new { @class = "form-control", @readonly = true })
+                    @Html.ValidationMessageFor(model => model.Sucursal.NombreSucursal)
+                
+            </div>
+
+
+            <br />
+
+            <div class="row" style="padding-top:30px">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="text-center">
+                                Selecciona
+                            </th>
+                            <th class="text-center " scope="col">
+                                Nombre
+                            </th>
+                            <th class="text-left" scope="col">
+                                Stock
+                            </th>
+                        </tr>
+                        @foreach (ML.SucursalProducto sucursalProducto in Model.SucursalProductos)
+                        {
+                             <tr>
+                                 
+                                   <td class="text-center">
+                                    <input  type="checkbox" value="@sucursalProducto.Producto.IdProducto" name="ListaSucursales" />
+                                   </td>
+                                   
+                              
+                                <td class="text-center">
+                                    @sucursalProducto.Producto.Nombre
+                                </td>
+                                <td class="text-center">
+                                    @sucursalProducto.Producto.Stock
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                    <div class="form-group col-md-12">
+                        <div class="text-right">
+                            <input class="btn btn-success" type="submit" value="Agregar" />
+                            <a class="btn btn-danger" href="@Url.Action("AgregarProductos", "SucursalProducto", new { IdSucursal = Model.Sucursal.IdSucursal })"> Regresar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

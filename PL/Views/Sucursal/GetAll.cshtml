@@ -1,0 +1,68 @@
+﻿@model ML.Sucursal
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sucursales</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un Usuario para editarlo o + para agregar...</h5>
+        <hr />
+    </div>
+
+</div>
+
+<div class="row">
+    <div style="float:right;">
+        @Html.ActionLink("+","Form","Sucursal", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+</div>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>
+            <td class="hidden">IdProducto</td>
+
+            <td>Nombre</td>
+            <td>Direccion</td>
+            <td>Telefono</td>
+            
+
+            <td>Eliminar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Sucursal sucursal in Model.SUcursales)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("ProductosAsignados", "SucursalProducto", new { IdSucursal = sucursal.IdSucursal })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                <td class="hidden">@sucursal.IdSucursal</td>
+
+
+                <td>@sucursal.NombreSucursal</td>
+                <td>@sucursal.Direccion</td>
+                <td>@sucursal.Telefono</td>
+                
+
+                
+
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Sucursal", new { IdSucursal = sucursal.IdSucursal })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3"></i></a></td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+@*</div>*@
+
+
+

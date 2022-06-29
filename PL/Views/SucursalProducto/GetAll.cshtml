@@ -1,0 +1,39 @@
+﻿@model ML.SucursalProducto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Inventario Total</h2>
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un registro para editarlo o (+) para agregar...</h5>
+        <hr />
+    </div>
+</div>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>
+            <td>IdSucursalProducto</td>
+            <td>IdSucursal</td>
+            <td>Nombre Sucursal</td>
+            <td>IdProducto </td>
+            <td>NombreProductos </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.SucursalProducto sucursalProducto in Model.SucursalProductos)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon" href="@Url.Action("ProductosAsignados", "SucursalProducto", new { IdSucursal = sucursalProducto.Sucursal.IdSucursal })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                <td>@sucursalProducto.IdSucursalProducto</td>
+                <td>@sucursalProducto.Sucursal.IdSucursal</td>
+                <td>@sucursalProducto.Sucursal.NombreSucursal</td>
+                <td>@sucursalProducto.Producto.IdProducto</td>
+                <td>@sucursalProducto.Producto.Nombre</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
